@@ -11,6 +11,7 @@
     width: 50%;
     border-radius: 10px;
     min-height: 600px;
+    overflow: hidden;
 
     .left {
       flex: 1;
@@ -50,9 +51,32 @@
       display: flex;
       flex-direction: column;
       gap: 50px;
+      justify-content: center;
 
       h1 {
         color: #555;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      input {
+        border: none;
+        border-bottom: 1px solid lightgray;
+        padding: 20px 10px;
+      }
+
+      button {
+        width: 50%;
+        padding: 10px;
+        border: none;
+        background-color: #938eef;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
       }
     }
   }
