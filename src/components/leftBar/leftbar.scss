@@ -1,4 +1,14 @@
 .leftbar {
+  flex: 2;
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   .container {
     padding: 20px;
 
@@ -14,6 +24,10 @@
       flex-direction: column;
       gap: 20px;
 
+      span {
+        font-size: 12px;
+      }
+
       .user {
         display: flex;
         align-items: center;
@@ -25,6 +39,10 @@
           border-radius: 50%;
           object-fit: cover;
         }
+
+        span {
+          font-size: 14px;
+        }
       }
 
       .item {
@@ -34,6 +52,10 @@
 
         img {
           width: 30px;
+        }
+
+        span {
+          font-size: 14px;
         }
       }
     }
