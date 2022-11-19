@@ -6,16 +6,15 @@ import {
   Navigate,
 } from "react-router-dom";
 import { NavBar, LeftBar, RightBar } from "./components";
+import { AuthContext } from "./context/authContext";
 import { DarkModeContext } from "./context/darkModeContext";
 import { Home, Login, Profile, Register } from "./pages";
 import "./style.scss";
 
 function App() {
-  const currentUser = true;
-
+  const { currentUser } = useContext(AuthContext);
   const { darkMode } = useContext(DarkModeContext);
 
-  console.log(darkMode);
   const Layout = () => {
     return (
       <div className={`theme-${darkMode ? "dark" : "light"}`}>
