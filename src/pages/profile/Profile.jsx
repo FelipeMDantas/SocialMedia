@@ -8,6 +8,7 @@ import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Posts from "../../components/posts/Posts";
 
 const Profile = () => {
   return (
@@ -30,23 +31,15 @@ const Profile = () => {
             <a href="http://facebook.com">
               <FacebookTwoToneIcon fontSize="large" />
             </a>
-          </div>
-          <div className="left">
             <a href="http://instagram.com">
               <InstagramIcon fontSize="large" />
             </a>
-          </div>
-          <div className="left">
             <a href="http://twitter.com">
               <TwitterIcon fontSize="large" />
             </a>
-          </div>
-          <div className="left">
             <a href="http://linkedin.com">
               <LinkedInIcon fontSize="large" />
             </a>
-          </div>
-          <div className="left">
             <a href="http://pinterest.com">
               <PinterestIcon fontSize="large" />
             </a>
@@ -62,14 +55,15 @@ const Profile = () => {
                 <LanguageIcon />
                 <span>user.dev</span>
               </div>
-              <button>follow</button>
             </div>
+            <button>follow</button>
           </div>
           <div className="right">
             <EmailOutlinedIcon />
             <MoreVertIcon />
           </div>
         </div>
+        <Posts />
       </div>
     </div>
   );
