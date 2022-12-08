@@ -18,8 +18,8 @@ const Comments = ({ postId }) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    (newPost) => {
-      return makeRequest.post("/comments", newPost);
+    (newComment) => {
+      return makeRequest.post("/comments", newComment);
     },
     {
       onSuccess: () => {
@@ -42,6 +42,7 @@ const Comments = ({ postId }) => {
           type="text"
           placeholder="write a comment"
           onChange={(e) => setDesc(e.target.value)}
+          value={desc}
         />
         <button onClick={handleClick}>Send</button>
       </div>
@@ -49,7 +50,7 @@ const Comments = ({ postId }) => {
         ? "loading"
         : data.map((comment) => (
             <div className="comment">
-              <img src={comment.profilePicture} alt="" />
+              <img src={comment.profilePic} alt="" />
               <div className="info">
                 <span>{comment.name}</span>
                 <p>{comment.desc}</p>

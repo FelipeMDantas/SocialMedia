@@ -1,4 +1,6 @@
 import { db } from "../connect.js";
+import jwt from "jsonwebtoken";
+import moment from "moment/moment.js";
 
 export const getComments = (req, res) => {
   const q = `select c.*, u.id as userId, name, profilePic from comments as c join users as u on (u.id = c.userId)
@@ -23,7 +25,6 @@ export const addComment = (req, res) => {
 
     const values = [
       req.body.desc,
-      req.body.img,
       moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
       userInfo.id,
       req.body.postId,
