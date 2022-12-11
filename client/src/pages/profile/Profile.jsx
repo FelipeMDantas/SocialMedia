@@ -17,7 +17,7 @@ import { AuthContext } from "../../context/authContext";
 
 const Profile = () => {
   const { currentUser } = useContext(AuthContext);
-  const userId = useLocation().pathname.split("/")[2];
+  const userId = parseInt(useLocation().pathname.split("/")[2]);
 
   const { isLoading, error, data } = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + userId).then((res) => {
@@ -25,7 +25,7 @@ const Profile = () => {
     })
   );
 
-  console.log(data);
+  const handleFollow = () => {};
 
   return (
     <div className="profile">
@@ -71,7 +71,7 @@ const Profile = () => {
                 {userId === currentUser.id ? (
                   <button>update</button>
                 ) : (
-                  <button>follow</button>
+                  <button onClick={handleFollow}>follow</button>
                 )}
               </div>
               <div className="right">
