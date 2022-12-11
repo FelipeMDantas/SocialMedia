@@ -67,7 +67,7 @@ const Post = ({ post }) => {
           <div className="item">
             {isLoading ? (
               "loading"
-            ) : data.includes(currentUser.id) ? (
+            ) : data?.includes(currentUser.id) ? (
               <FavoriteOutlinedIcon
                 style={{ color: "red" }}
                 onClick={handleLike}
@@ -75,7 +75,7 @@ const Post = ({ post }) => {
             ) : (
               <FavoriteBorderOutlinedIcon onClick={handleLike} />
             )}
-            {data.length} Likes
+            {data?.length} Likes
           </div>
           <div className="item">
             <TextsmsOutlinedIcon onClick={() => setCommentOpen(!commentOpen)} />

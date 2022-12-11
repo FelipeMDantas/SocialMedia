@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import moment from "moment/moment.js";
 
 export const getPosts = (req, res) => {
+  const userId = req.query.userId;
   const token = req.cookies.accessToken;
 
   if (!token) return res.status(401).json("Not logged in!");
@@ -10,11 +11,15 @@ export const getPosts = (req, res) => {
   jwt.verify(token, "secretkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
-    const q = `select p.*, u.id as userId, name, profilePic from posts as p join users as u on (u.id = p.userId)
+    const q = userId
+      ? `select p.*, u.id as userId, name, profilePic from posts as p join users as u on (u.id = p.userId) where p.userId = ?`
+      : `select p.*, u.id as userId, name, profilePic from posts as p join users as u on (u.id = p.userId)
     left join relationships as r on (p.userId = r.followedUserId) where r.followerUserId = ? or p.userId = ?
     order by p.createdAt desc`;
 
-    db.query(q, [userInfo.id, userInfo.id], (err, data) => {
+    const values = userId ? [userId] : [userInfo.id, userInfo.id];
+
+    db.query(q, values, (err, data) => {
       if (err) return res.status(500).json(err);
       return res.status(200).json(data);
     });

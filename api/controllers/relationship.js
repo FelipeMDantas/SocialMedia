@@ -2,11 +2,13 @@ import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 
 export const getRelationships = (req, res) => {
-  const q = "select userId from likes where postId = ?";
+  const q = "select followerUserId from relationships where followedUserId = ?";
 
-  db.query(q, [req.query.postId], (err, data) => {
+  db.query(q, [req.query.followedUserId], (err, data) => {
     if (err) return res.status(500).json(err);
-    return res.status(200).json(data.map((like) => like.userId));
+    return res
+      .status(200)
+      .json(data.map((relationship) => relationship.followerUserId));
   });
 };
 
@@ -18,13 +20,14 @@ export const addRelationship = (req, res) => {
   jwt.verify(token, "secretkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
-    const q = "insert into likes (`userId`, `postId`) values (?)";
+    const q =
+      "insert into relationships (`followerUserId`, `followedUserId`) values (?)";
 
-    const values = [userInfo.id, req.body.postId];
+    const values = [userInfo.id, req.body.userId];
 
     db.query(q, [values], (err, data) => {
       if (err) return res.status(500).json(err);
-      return res.status(200).json("Post has been liked");
+      return res.status(200).json("Following");
     });
   });
 };
@@ -37,11 +40,12 @@ export const deleteRelationship = (req, res) => {
   jwt.verify(token, "secretkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
-    const q = "delete from likes where `userId`= ? and `postId`= ?";
+    const q =
+      "delete from relationships where `followerUserId`= ? and `followedUserId`= ?";
 
-    db.query(q, [userInfo.id, req.query.postId], (err, data) => {
+    db.query(q, [userInfo.id, req.query.userId], (err, data) => {
       if (err) return res.status(500).json(err);
-      return res.status(200).json("Post has been disliked.");
+      return res.status(200).json("Unfollow.");
     });
   });
 };
