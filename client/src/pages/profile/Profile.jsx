@@ -61,8 +61,12 @@ const Profile = () => {
       ) : (
         <>
           <div className="images">
-            <img src={data.coverPic} alt="" className="cover" />
-            <img src={data.profilePic} alt="" className="profilePic" />
+            <img src={"/upload/" + data.coverPic} alt="" className="cover" />
+            <img
+              src={"/upload/" + data.profilePic}
+              alt=""
+              className="profilePic"
+            />
           </div>
           <div className="profileContainer">
             <div className="uInfo">
@@ -116,7 +120,7 @@ const Profile = () => {
           </div>
         </>
       )}
-      {openUpdate && <Update setOpenUpdate={setOpenUpdate} />}
+      {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data} />}
     </div>
   );
 };
